@@ -39,8 +39,6 @@ def draw_mask(img, generated_mask):
     
     generated_mask = np.reshape(generated_mask, (480, 640, 1))
     
-    x = np.zeros(shape=(480, 640, 3))
-    
     masked_image = np.where(generated_mask,
                             np.array([0,255,0], dtype='uint8'),
                             masked_image)

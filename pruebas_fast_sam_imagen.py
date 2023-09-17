@@ -23,13 +23,12 @@ everything_results = model(
     retina_masks=True,
     imgsz=1024,
     conf=0.4,
-    iou=0.9,
+    iou=0.9
 )
 prompt_process = FastSAMPrompt(IMAGE_PATH, everything_results, device=DEVICE)
 
 # # everything prompt
 ann = prompt_process.everything_prompt()
-
 # # bbox prompt
 # # bbox default shape [0,0,0,0] -> [x1,y1,x2,y2]
 # bboxes default shape [[0,0,0,0]] -> [[x1,y1,x2,y2]]
