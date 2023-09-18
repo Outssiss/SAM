@@ -6,25 +6,25 @@ import torch
 import threading
 
 image = None
-new_image = 0
 masks = None
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 #Carga del checkpoint del modelo
-sam = sam_model_registry["vit_l"](checkpoint="checkpoints/sam_vit_l_0b3195.pth")
-sam.to(device=device)
-predictor = SamPredictor(sam)
 
 input_point = np.array([[320, 250]])
 input_label = np.array([1])
 
 def process_image():
     
+    sam = sam_model_registry["vit_l"](checkpoint="checkpoints/sam_vit_l_0b3195.pth")
+    sam.to(device=device)
+    predictor = SamPredictor(sam)
+    
+    global image
+    global masks
+    
     while True:
-        
-        global image
-        global masks
         
         if image is not None:
             img_array = np.asarray(image)
@@ -47,9 +47,6 @@ def draw_mask(img, generated_mask):
     
     return cv2.addWeighted(img, 0.3, masked_image, 0.7, 0)
     
-            
-
-
 cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 if __name__ == "__main__":
