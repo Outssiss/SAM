@@ -34,7 +34,8 @@ def process_image():
             
             prompt_process = FastSAMPrompt(image, everything_results, device=DEVICE)
             
-            mask = prompt_process.point_prompt(points=[[320, 250]], pointlabel=[1])
+            #mask = prompt_process.point_prompt(points=[[320, 250]], pointlabel=[1])
+            mask = prompt_process.text_prompt(text='')
         
         else:
             print("Imagen sigue siendo nula")
